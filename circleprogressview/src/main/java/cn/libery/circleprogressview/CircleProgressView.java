@@ -160,9 +160,9 @@ public class CircleProgressView extends View {
         canvas.drawOval(rectF, circlePaint);
         int baseline = (int) ((rectF.bottom + rectF.top - fontMetrics.bottom - fontMetrics.top) / 2);
         if (progress == 0) {
-            canvas.drawText(String.valueOf(maxProgress), rectF.centerX(), baseline, textPaint);
+            canvas.drawText(String.valueOf(maxProgress / 1000), rectF.centerX(), baseline, textPaint);
         } else if (progress == maxProgress) {
-            canvas.drawText(String.valueOf(maxProgress), rectF.centerX(), baseline, textPaint);
+            canvas.drawText(String.valueOf(maxProgress / 1000), rectF.centerX(), baseline, textPaint);
         } else {
             canvas.drawText(String.valueOf((maxProgress - progress) / 1000 + 1), rectF.centerX(), baseline, textPaint);
         }
