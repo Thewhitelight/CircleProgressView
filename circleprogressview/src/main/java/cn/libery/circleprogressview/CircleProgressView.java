@@ -233,9 +233,9 @@ public class CircleProgressView extends View {
     }
 
     private void addProgress() {
-        progress += 20;
+        progress += 100;
         invalidate();
-        mHandler.sendEmptyMessageDelayed(1, 10);
+        mHandler.sendEmptyMessageDelayed(1, 100);
     }
 
     @Override
