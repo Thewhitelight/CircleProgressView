@@ -8,9 +8,12 @@ import android.graphics.Paint;
 import android.graphics.RectF;
 import android.os.Handler;
 import android.os.Message;
+import android.support.annotation.IntDef;
 import android.util.AttributeSet;
 import android.view.View;
 
+import java.lang.annotation.Retention;
+import java.lang.annotation.RetentionPolicy;
 import java.lang.ref.WeakReference;
 
 /**
@@ -71,27 +74,69 @@ public class CircleProgressView extends View {
         return maxProgress;
     }
 
-    public int getProgress() {
+    public float getProgress() {
         return progress;
+    }
+
+    public Paint.Style getPaintStyle() {
+        return secondCirclePaintStyle;
+    }
+
+    public void setPaintStyle(final Paint.Style secondCirclePaintStyle) {
+        this.secondCirclePaintStyle = secondCirclePaintStyle;
+        secondCirclePaint.setStyle(secondCirclePaintStyle);
+    }
+
+    public int getProgressMode() {
+        return progressMode;
     }
 
     //endregion
     private Paint circlePaint;
     private Paint textPaint;
     private Paint secondCirclePaint;
+
     private int circleWidth = 30;
     private int circleColor = Color.RED;
     private int circleRadius = 40;
 
+    private Paint.Style secondCirclePaintStyle = Paint.Style.STROKE;
     private int secondCircleColor = Color.WHITE;
 
     private int textSize = 20;
     private int textColor = Color.BLACK;
     private Paint.FontMetricsInt fontMetrics;
 
+    public void setProgress(final float progress) {
+        this.progress = progress;
+        if (progress > maxProgress && mFinishListener != null) {
+            mFinishListener.finish();
+        }
+        invalidate();
+    }
 
-    private int progress = 0;
+    private float progress = 0;
     private int maxProgress = 1000;
+
+
+    public void setProgressMode(@ProgressMode final int progressMode) {
+        this.progressMode = progressMode;
+        if (progressMode == ASC) {
+            maxProgress = 100;
+        }
+    }
+
+
+    private int progressMode = DESC;
+
+    @Retention(RetentionPolicy.RUNTIME)
+    @IntDef({ASC, DESC})
+    public @interface ProgressMode {
+    }
+
+    public static final int ASC = 0;
+
+    public static final int DESC = 1;
 
     public void setFinishListener(final FinishListener finishListener) {
         mFinishListener = finishListener;
@@ -131,7 +176,7 @@ public class CircleProgressView extends View {
 
     private void initSecondCirclePaint() {
         secondCirclePaint = new Paint(Paint.ANTI_ALIAS_FLAG);
-        secondCirclePaint.setStyle(Paint.Style.STROKE);
+        secondCirclePaint.setStyle(secondCirclePaintStyle);
         secondCirclePaint.setColor(secondCircleColor);
         secondCirclePaint.setStrokeWidth(circleWidth);
     }
@@ -158,15 +203,28 @@ public class CircleProgressView extends View {
         final RectF rectF = new RectF(circleWidth, circleWidth, canvas.getWidth() - circleWidth, canvas.getHeight() -
                 circleWidth);
         canvas.drawOval(rectF, circlePaint);
+        if (secondCirclePaintStyle == Paint.Style.FILL) {
+            canvas.drawArc(rectF, -90, (progress / maxProgress) * 360, true, secondCirclePaint);
+        } else {
+            canvas.drawArc(rectF, -90, (progress / maxProgress) * 360, false, secondCirclePaint);
+        }
+
         int baseline = (int) ((rectF.bottom + rectF.top - fontMetrics.bottom - fontMetrics.top) / 2);
         if (progress == 0) {
             canvas.drawText(String.valueOf(maxProgress / 1000), rectF.centerX(), baseline, textPaint);
-        } else if (progress == maxProgress) {
+        } else if (progress == maxProgress && maxProgress != 100) {
             canvas.drawText(String.valueOf(maxProgress / 1000), rectF.centerX(), baseline, textPaint);
         } else {
-            canvas.drawText(String.valueOf((maxProgress - progress) / 1000 + 1), rectF.centerX(), baseline, textPaint);
+            if (progressMode == ASC) {
+                if (progress > 100) {
+                    progress = 100;
+                }
+                canvas.drawText(String.valueOf(progress)+"%", rectF.centerX(), baseline, textPaint);
+            } else {
+                canvas.drawText(String.valueOf((int) (maxProgress - progress) / 1000 + 1), rectF.centerX(), baseline,
+                        textPaint);
+            }
         }
-        canvas.drawArc(rectF, -90, ((float) progress / maxProgress) * 360, false, secondCirclePaint);
     }
 
     public void setMaxProgress(final int maxProgress) {

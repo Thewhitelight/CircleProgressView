@@ -9,16 +9,62 @@
     android:orientation="vertical"
     tools:context="cn.libery.cirlceprogressview.MainActivity">
 
-    <cn.libery.circleprogressview.CircleProgressView
-        android:id="@+id/circleView"
-        android:layout_width="50dp"
-        android:layout_height="50dp"
-        app:circle_color="#a1d31c"
-        app:circle_radius="20dp"
-        app:circle_width="4dp"
-        app:second_circle_color="#666"
-        app:text_color="#111"
-        app:text_size="15sp"/>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <cn.libery.circleprogressview.CircleProgressView
+            android:id="@+id/circleView_stroke"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            app:circle_color="#a1d31c"
+            app:circle_radius="20dp"
+            app:circle_width="4dp"
+            app:second_circle_color="#666"
+            app:text_color="#111"
+            app:text_size="15sp"/>
+
+        <cn.libery.circleprogressview.CircleProgressView
+            android:id="@+id/circleView_fill"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            app:circle_color="#a1d31c"
+            app:circle_radius="20dp"
+            app:circle_width="4dp"
+            app:second_circle_color="#666"
+            app:text_color="#111"
+            app:text_size="15sp"/>
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <cn.libery.circleprogressview.CircleProgressView
+            android:id="@+id/circleView_stroke_asc"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            app:circle_color="#a1d31c"
+            app:circle_radius="20dp"
+            app:circle_width="4dp"
+            app:second_circle_color="#666"
+            app:text_color="#111"
+            app:text_size="12sp"/>
+
+        <cn.libery.circleprogressview.CircleProgressView
+            android:id="@+id/circleView_fill_asc"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            app:circle_color="#a1d31c"
+            app:circle_radius="20dp"
+            app:circle_width="4dp"
+            app:second_circle_color="#666"
+            app:text_color="#111"
+            app:text_size="12sp"/>
+    </LinearLayout>
+
 
     <Button
         android:id="@+id/btn"
