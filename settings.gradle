@@ -1,1 +1,1 @@
-include ':app', ':circleprogressview'
+include ':app', ':circleprogressview-1.0', ':countdownview'

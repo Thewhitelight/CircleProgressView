@@ -4,7 +4,8 @@
     <modules>
       <module fileurl="file://$PROJECT_DIR$/CircleProgressView.iml" filepath="$PROJECT_DIR$/CircleProgressView.iml" />
       <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
-      <module fileurl="file://$PROJECT_DIR$/circleprogressview/circleprogressview.iml" filepath="$PROJECT_DIR$/circleprogressview/circleprogressview.iml" />
+      <module fileurl="file://$PROJECT_DIR$/circleprogressview-1.0/circleprogressview-1.0.iml" filepath="$PROJECT_DIR$/circleprogressview-1.0/circleprogressview-1.0.iml" />
+      <module fileurl="file://$PROJECT_DIR$/countdownview/countdownview.iml" filepath="$PROJECT_DIR$/countdownview/countdownview.iml" />
     </modules>
   </component>
 </project>

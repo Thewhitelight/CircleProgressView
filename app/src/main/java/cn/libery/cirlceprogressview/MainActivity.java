@@ -7,6 +7,8 @@ import android.view.View;
 import android.widget.Toast;
 
 import cn.libery.circleprogressview.CircleProgressView;
+import cn.libery.countdownview.CountDownView;
+
 
 public class MainActivity extends AppCompatActivity {
 
@@ -75,6 +77,15 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(final View view) {
                 mCircleFillASC.setProgress(num2 += num2);
+            }
+        });
+
+        CountDownView countDownView = (CountDownView) findViewById(R.id.count_down);
+        countDownView.setTimeStamp(System.currentTimeMillis()/1000+100000);
+        countDownView.setFinishListener(new CountDownView.FinishListener() {
+            @Override
+            public void finish() {
+                Toast.makeText(getApplicationContext(),"finish",Toast.LENGTH_SHORT).show();
             }
         });
     }
