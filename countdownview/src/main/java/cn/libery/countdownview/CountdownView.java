@@ -53,8 +53,14 @@ public class CountDownView extends LinearLayout {
         hh = (TextView) contentView.findViewById(R.id.hh);
         mm = (TextView) contentView.findViewById(R.id.mm);
         ss = (TextView) contentView.findViewById(R.id.ss);
+        if (getVisibility() == VISIBLE) {
+            initHandler();
+        }
+    }
+
+    private void initHandler() {
         mHandler = new CountDownHandler(this);
-        mHandler.sendEmptyMessageDelayed(1, 1000);
+        mHandler.sendEmptyMessage(1);
     }
 
     private static class CountDownHandler extends Handler {
@@ -71,6 +77,14 @@ public class CountDownView extends LinearLayout {
             if (view != null) {
                 view.refreshTimestamp();
             }
+        }
+    }
+
+    @Override
+    public void setVisibility(final int visibility) {
+        super.setVisibility(visibility);
+        if (visibility == VISIBLE && mHandler == null) {
+            initHandler();
         }
     }
 
@@ -95,7 +109,7 @@ public class CountDownView extends LinearLayout {
         ss.setText(String.valueOf(seconds));
         if (mFinishListener != null && diff <= 0) {
             mFinishListener.finish();
-            mHandler.removeCallbacksAndMessages(null);
+            mHandler.removeMessages(1);
         }
         if (diff > 0) {
             mHandler.sendEmptyMessageDelayed(1, 1000);
