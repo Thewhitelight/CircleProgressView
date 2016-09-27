@@ -7,6 +7,8 @@ import android.view.View;
 import android.widget.Toast;
 
 import cn.libery.circleprogressview.CircleProgressView;
+import cn.libery.cirlceprogressview.ui.CommentStartView;
+import cn.libery.cirlceprogressview.ui.ShadowView;
 import cn.libery.countdownview.CountDownView;
 
 
@@ -81,12 +83,24 @@ public class MainActivity extends AppCompatActivity {
         });
 
         CountDownView countDownView = (CountDownView) findViewById(R.id.count_down);
-        countDownView.setTimeStamp(System.currentTimeMillis()/1000+100000);
+        countDownView.setTimeStamp(System.currentTimeMillis() / 1000 + 100000);
         countDownView.setFinishListener(new CountDownView.FinishListener() {
             @Override
             public void finish() {
-                Toast.makeText(getApplicationContext(),"finish",Toast.LENGTH_SHORT).show();
+                Toast.makeText(getApplicationContext(), "finish", Toast.LENGTH_SHORT).show();
             }
         });
+
+        CommentStartView start = (CommentStartView) findViewById(R.id.comment_star);
+        start.setStartNum(1);
+
+        ShadowView shadow = (ShadowView) findViewById(R.id.shadow);
+        shadow.setOnSelectListener(new ShadowView.onSelectListener() {
+            @Override
+            public void onSelect(final boolean isSelect) {
+                Toast.makeText(getApplicationContext(), "onClick" + isSelect, Toast.LENGTH_SHORT).show();
+            }
+        });
+
     }
 }

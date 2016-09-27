@@ -76,4 +76,16 @@
         android:id="@+id/count_down"
         android:layout_width="match_parent"
         android:layout_height="50dp"/>
+
+    <cn.libery.cirlceprogressview.ui.CommentStartView
+        android:id="@+id/comment_star"
+        android:layout_width="wrap_content"
+        android:layout_height="30dp"/>
+
+    <cn.libery.cirlceprogressview.ui.ShadowView
+        android:id="@+id/shadow"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"/>
+
+
 </LinearLayout>
