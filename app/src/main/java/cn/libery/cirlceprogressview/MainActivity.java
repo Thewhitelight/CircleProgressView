@@ -9,6 +9,7 @@ import android.widget.Toast;
 import cn.libery.circleprogressview.CircleProgressView;
 import cn.libery.cirlceprogressview.ui.CommentStartView;
 import cn.libery.cirlceprogressview.ui.ShadowView;
+import cn.libery.cirlceprogressview.ui.SpanTextView;
 import cn.libery.countdownview.CountDownView;
 
 
@@ -101,6 +102,16 @@ public class MainActivity extends AppCompatActivity {
                 Toast.makeText(getApplicationContext(), "onClick" + isSelect, Toast.LENGTH_SHORT).show();
             }
         });
+
+        SpanTextView spanTextView = (SpanTextView) findViewById(R.id.span_tv);
+        spanTextView.append("测试");
+        spanTextView.spannable("Test").absoluteSize(36).underline().click(new SpanTextView.OnClickListener() {
+
+            @Override
+            public void onClick(final CharSequence text) {
+                Toast.makeText(getApplicationContext(), "Test", Toast.LENGTH_SHORT).show();
+            }
+        }).commit();
 
     }
 }
