@@ -105,7 +105,14 @@ public class MainActivity extends AppCompatActivity {
 
         SpanTextView spanTextView = (SpanTextView) findViewById(R.id.span_tv);
         spanTextView.append("测试");
-        spanTextView.spannable("Test").absoluteSize(36).underline().click(new SpanTextView.OnClickListener() {
+        spanTextView.spannable("Test").absoluteSize(36, true).underline().click(new SpanTextView.OnClickListener() {
+
+            @Override
+            public void onClick(final CharSequence text) {
+                Toast.makeText(getApplicationContext(), "Test", Toast.LENGTH_SHORT).show();
+            }
+        }).commit();
+        spanTextView.spannable("Test").absoluteSize(12).click(new SpanTextView.OnClickListener() {
 
             @Override
             public void onClick(final CharSequence text) {
