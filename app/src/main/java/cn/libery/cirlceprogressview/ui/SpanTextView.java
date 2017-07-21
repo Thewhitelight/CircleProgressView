@@ -41,9 +41,7 @@ import java.util.Set;
  * Email:libery.szq@qq.com
  */
 
-public class SpanTextView extends TextView {
-
-    private static final String TAG = "TAGSpanTextView";
+public class SpanTextView extends android.support.v7.widget.AppCompatTextView {
 
     public SpanTextView(Context context) {
         super(context);
@@ -60,7 +58,6 @@ public class SpanTextView extends TextView {
     public Spannable spannable(CharSequence text) {
         return new Spannable(text);
     }
-
 
     public final class Spannable {
 

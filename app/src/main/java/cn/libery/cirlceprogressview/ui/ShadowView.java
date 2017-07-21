@@ -3,12 +3,10 @@ package cn.libery.cirlceprogressview.ui;
 import android.annotation.SuppressLint;
 import android.content.Context;
 import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
 import android.graphics.Paint;
-import android.graphics.PixelFormat;
 import android.graphics.RectF;
-import android.graphics.drawable.BitmapDrawable;
-import android.graphics.drawable.Drawable;
 import android.media.ThumbnailUtils;
 import android.util.AttributeSet;
 import android.view.View;
@@ -69,28 +67,13 @@ public class ShadowView extends View implements View.OnClickListener {
         rectF.right = 300;
         rectF.bottom = 300;
         canvas.drawRoundRect(rectF, 20, 20, mPaint);
-        Bitmap bitmap = drawableToBitmap(getResources().getDrawable(R.mipmap.ic_launcher));
+        Bitmap bitmap = drawableToBitmap(R.mipmap.ic_launcher);
         bitmap = ThumbnailUtils.extractThumbnail(bitmap, 200, 200);
         canvas.drawBitmap(bitmap, 100, 100, mPaint);
     }
 
-    public Bitmap drawableToBitmap(Drawable drawable) {
-        if (drawable == null) {
-            return null;
-        }
-        if (drawable instanceof BitmapDrawable) {
-            return ((BitmapDrawable) drawable).getBitmap();
-        }
-        int w = drawable.getIntrinsicWidth();
-        int h = drawable.getIntrinsicHeight();
-        Bitmap.Config config = drawable.getOpacity() != PixelFormat.OPAQUE ? Bitmap.Config.ARGB_8888 : Bitmap.Config
-                .RGB_565;
-        Bitmap bitmap = Bitmap.createBitmap(w, h, config);
-        Canvas canvas = new Canvas(bitmap);
-        drawable.setBounds(0, 0, w, h);
-        drawable.draw(canvas);
-        return bitmap;
-
+    public Bitmap drawableToBitmap(int drawableRes) {
+        return BitmapFactory.decodeResource(getResources(), drawableRes);
     }
 
     @Override
@@ -105,4 +88,5 @@ public class ShadowView extends View implements View.OnClickListener {
         invalidate();
         mOnSelectListener.onSelect(isSelect);
     }
+
 }

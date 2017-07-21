@@ -2,9 +2,9 @@ package cn.libery.cirlceprogressview.ui;
 
 import android.content.Context;
 import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
 import android.graphics.Paint;
-import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
 import android.util.AttributeSet;
 import android.view.View;
@@ -37,18 +37,17 @@ public class CommentStartView extends View {
         super.onDraw(canvas);
         for (int i = 0; i < 5; i++) {
             if (i < startNum) {
-                Drawable d = getContext().getResources().getDrawable(R.drawable.ic_star_sel);
-                canvas.drawBitmap(drawableToBitmap(d), (d.getIntrinsicWidth() + 5) * i, 0, paint);
+                Bitmap b= drawableToBitmap(R.drawable.ic_star_sel);
+                canvas.drawBitmap(b, (b.getWidth() + 5) * i, 0, paint);
             } else {
-                Drawable d = getContext().getResources().getDrawable(R.drawable.ic_star_unsel);
-                canvas.drawBitmap(drawableToBitmap(d), (d.getIntrinsicWidth() + 5) * i, 0, paint);
+                Bitmap b= drawableToBitmap(R.drawable.ic_star_unsel);
+                canvas.drawBitmap(b, (b.getWidth() + 5) * i, 0, paint);
             }
         }
     }
 
-    private Bitmap drawableToBitmap(Drawable drawable) {
-        BitmapDrawable bd = (BitmapDrawable) drawable;
-        return bd.getBitmap();
+    private Bitmap drawableToBitmap(int drawableRes) {
+        return BitmapFactory.decodeResource(getResources(), drawableRes);
     }
 
 }
